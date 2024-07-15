@@ -1,7 +1,13 @@
 library fl_music_xml_parser;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
+import 'package:flutter/services.dart';
+import 'package:xml/xml.dart';
+
+class MxlDocument {
+  String? title;
+
+  Future<void> loadMusicXmlFile(String filePath) async {
+    final xmlStr = await rootBundle.loadString(filePath);
+    final document = XmlDocument.parse(xmlStr);
+  }
 }
