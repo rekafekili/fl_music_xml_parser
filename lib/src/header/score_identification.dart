@@ -1,8 +1,6 @@
 import 'package:xml/xml.dart';
 import 'package:xml/xpath.dart';
 
-import 'score_encoding.dart';
-
 class ScoreIdentification {
   // Creator
   String? composer;
@@ -52,5 +50,17 @@ class ScoreIdentification {
           composer = xmlNode.innerText;
       }
     });
+  }
+}
+
+class ScoreEncoding {
+  String? software;
+  String? encodingDate;
+
+  ScoreEncoding(XmlNode nodeEncoding) {
+    software = nodeEncoding.getElement('software')?.innerText;
+    encodingDate = nodeEncoding.getElement('encoding-date')?.innerText;
+
+    // TODO: Add more encoding properties. e.g. supports, supports attribute
   }
 }
