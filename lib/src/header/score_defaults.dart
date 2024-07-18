@@ -6,6 +6,10 @@ class ScoreDefaults {
   ScorePageLayout? pageLayout;
   ScoreSystemLayout? systemLayout;
   ScoreAppearance? appearance;
+  ScoreMusicFont? musicFont;
+  ScoreWordFont? wordFont;
+  ScoreLyricFont? lyricFont;
+  ScoreLyricLanguage? lyricLanguage;
 
   ScoreDefaults(XmlNode element) {
     final scaling = element.getElement('scaling');
@@ -18,7 +22,80 @@ class ScoreDefaults {
     pageLayout = ScorePageLayout(element.getElement('page-layout'));
     systemLayout = ScoreSystemLayout(element.getElement('system-layout'));
     appearance = ScoreAppearance(element.getElement('appearance'));
+
+    if (element.getElement('music-font') != null) {
+      musicFont = ScoreMusicFont();
+      musicFont?.fontFamily =
+          element.getElement('music-font')?.getAttribute('font-family');
+      musicFont?.fontSize =
+          element.getElement('music-font')?.getAttribute('font-size');
+      musicFont?.fontStyle =
+          element.getElement('music-font')?.getAttribute('font-style');
+      musicFont?.fontWeight =
+          element.getElement('music-font')?.getAttribute('font-weight');
+    }
+
+    if (element.getElement('word-font') != null) {
+      wordFont = ScoreWordFont();
+      wordFont?.fontFamily =
+          element.getElement('word-font')?.getAttribute('font-family');
+      wordFont?.fontSize =
+          element.getElement('word-font')?.getAttribute('font-size');
+      wordFont?.fontStyle =
+          element.getElement('word-font')?.getAttribute('font-style');
+      wordFont?.fontWeight =
+          element.getElement('word-font')?.getAttribute('font-weight');
+    }
+
+    if (element.getElement('lyric-font') != null) {
+      lyricFont = ScoreLyricFont();
+      lyricFont?.fontFamily =
+          element.getElement('lyric-font')?.getAttribute('font-family');
+      lyricFont?.fontSize =
+          element.getElement('lyric-font')?.getAttribute('font-size');
+      lyricFont?.fontStyle =
+          element.getElement('lyric-font')?.getAttribute('font-style');
+      lyricFont?.fontWeight =
+          element.getElement('lyric-font')?.getAttribute('font-weight');
+      lyricFont?.name = element.getElement('lyric-font')?.getAttribute('name');
+      lyricFont?.number =
+          element.getElement('lyric-font')?.getAttribute('number');
+    }
+
+    if (element.getElement('lyric-language') != null) {
+      lyricLanguage = ScoreLyricLanguage();
+      lyricLanguage?.xmlLang =
+          element.getElement('lyric-language')?.getAttribute('xml:lang');
+      lyricLanguage?.name =
+          element.getElement('lyric-language')?.getAttribute('name');
+      lyricLanguage?.number =
+          element.getElement('lyric-language')?.getAttribute('number');
+    }
   }
+}
+
+class ScoreLyricLanguage {
+  String? xmlLang;
+  String? name;
+  String? number;
+}
+
+class ScoreLyricFont extends ScoreFont {
+  String? name;
+  String? number;
+}
+
+class ScoreWordFont extends ScoreFont {}
+
+class ScoreMusicFont extends ScoreFont {}
+
+class ScoreFont {
+  String? fontFamily;
+  String? fontSize;
+  String? fontStyle;
+  String? fontWeight;
+
+  double get fontSizeDouble => double.tryParse(fontSize ?? '') ?? 0.0;
 }
 
 class ScoreAppearance {
@@ -143,26 +220,6 @@ class ScoreAppearance {
       }
     });
   }
-}
-
-class ScoreLyricLanguage {}
-
-class ScoreLyricFont extends ScoreFont {
-  String? name;
-  String? number;
-}
-
-class ScoreWordFont extends ScoreFont {}
-
-class ScoreMusicFont extends ScoreFont {}
-
-class ScoreFont {
-  String? fontFamily;
-  String? fontSize;
-  String? fontStyle;
-  String? fontWeight;
-
-  double get fontSizeDouble => double.tryParse(fontSize ?? '') ?? 0.0;
 }
 
 class ScoreDistance {

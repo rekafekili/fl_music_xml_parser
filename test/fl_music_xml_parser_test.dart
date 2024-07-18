@@ -44,5 +44,11 @@ void main() async {
     expect(doc.defaults?.appearance?.noteSize?.large, 0);
     expect(doc.defaults?.appearance?.distance?.beam, 7.5);
     expect(doc.defaults?.appearance?.distance?.hyphen, 60);
+    expect(doc.defaults?.musicFont?.fontFamily, 'Maestro,engraved');
+    expect(doc.defaults?.musicFont?.fontSize, '14.25');
+    expect(doc.defaults?.musicFont?.fontSizeDouble, 14.25);
+    expect(doc.defaults?.wordFont?.fontFamily, 'Times New Roman');
+    expect(doc.defaults?.wordFont?.fontSize, '8');
+    expect(doc.defaults?.wordFont?.fontSizeDouble, 8.0);
   });
 }
