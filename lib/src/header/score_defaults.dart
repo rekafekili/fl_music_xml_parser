@@ -23,6 +23,10 @@ class ScoreDefaults {
     systemLayout = ScoreSystemLayout(element.getElement('system-layout'));
     appearance = ScoreAppearance(element.getElement('appearance'));
 
+    _initDefaultFonts(element);
+  }
+
+  void _initDefaultFonts(XmlNode element) {
     if (element.getElement('music-font') != null) {
       musicFont = ScoreMusicFont();
       musicFont?.fontFamily =

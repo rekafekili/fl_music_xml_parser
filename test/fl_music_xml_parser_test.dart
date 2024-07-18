@@ -50,5 +50,17 @@ void main() async {
     expect(doc.defaults?.wordFont?.fontFamily, 'Times New Roman');
     expect(doc.defaults?.wordFont?.fontSize, '8');
     expect(doc.defaults?.wordFont?.fontSizeDouble, 8.0);
+    expect(doc.partList?.scoreParts[0].id, 'P1');
+    expect(doc.partList?.scoreParts[0].partName, 'MusicXML Part');
+    expect(doc.partList?.scoreParts[0].instrument?.id, 'P1-I1');
+    expect(
+        doc.partList?.scoreParts[0].instrument?.instrumentName, 'Grand Piano');
+    expect(doc.partList?.scoreParts[0].midiInstrument?.id, 'P1-I1');
+    expect(doc.partList?.scoreParts[0].midiInstrument?.midiChannel, '1');
+    expect(doc.partList?.scoreParts[0].midiInstrument?.midiProgram, '1');
+    expect(doc.partList?.scoreParts[0].midiInstrument?.volume, '80');
+    expect(doc.partList?.scoreParts[0].midiInstrument?.pan, '0');
+
+    print('Test \'assets/Saltarello.musicxml\' passed!');
   });
 }
