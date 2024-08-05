@@ -1,3 +1,4 @@
+import 'package:fl_music_xml_parser/src/body/score_part.dart';
 import 'package:fl_music_xml_parser/src/header/score_part_list.dart';
 import 'package:xml/xml.dart';
 import 'package:xml/xpath.dart';
@@ -12,6 +13,7 @@ class ScoreXml {
   ScoreIdentification? identification;
   ScoreDefaults? defaults;
   ScorePartList? partList;
+  ScorePart? part;
 
   ScoreXml(XmlDocument xmlDocument) {
     isScorePartwise = (xmlDocument.rootElement.name.local == 'score-partwise');
@@ -28,5 +30,7 @@ class ScoreXml {
 
     final nodePartList = xmlDocument.xpath('/score-partwise/part-list').first;
     partList = ScorePartList(nodePartList);
+
+    part = ScorePart(xmlDocument.xpath('score-partwise/part').toList());
   }
 }
