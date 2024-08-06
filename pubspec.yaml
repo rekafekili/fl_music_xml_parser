@@ -1,6 +1,7 @@
 name: fl_music_xml_parser
-description: A new Flutter package project.
+description: Music XML parser for Flutter
 version: 0.0.1
+repository: https://github.com/rekafekili/fl_music_xml_parser
 homepage:
 
 environment:

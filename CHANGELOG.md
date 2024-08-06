@@ -1,3 +1,4 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+- Pre release for music xml parser
+- Only Test-Pass from `Saltarello.musicxml`
