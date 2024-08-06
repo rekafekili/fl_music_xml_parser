@@ -24,7 +24,24 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/
+    - assets/ActorPreludeSample/
+    - assets/BeetAnGeSample/
+    - assets/Binchois/
+    - assets/BrahWiMeSample/
+    - assets/BrookeWestSample/
+    - assets/Chant/
+    - assets/DebuMandSample/
+    - assets/Dichterliebe01/
+    - assets/Echigo-Jishi/
+    - assets/FaurReveSample/
+    - assets/MahlFaGe4Sample/
+    - assets/MozaChloSample/
+    - assets/MozartPianoSonata/
+    - assets/MozartTrio/
+    - assets/MozaVeilSample/
+    - assets/Saltarello/
+    - assets/SchbAvMaSample/
+    - assets/Telemann/
 
   # To add assets to your package, add an assets section, like this:
   # assets:

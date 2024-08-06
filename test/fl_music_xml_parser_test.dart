@@ -1,5 +1,3 @@
-import 'package:fl_music_xml_parser/src/body/score_part.dart';
-import 'package:fl_music_xml_parser/src/header/score_defaults.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -7,9 +5,10 @@ import 'package:fl_music_xml_parser/fl_music_xml_parser.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  MusicXmlParser mxlDocument = MusicXmlParser('assets/Saltarello.musicxml');
+  MusicXmlParser mxlDocument =
+      MusicXmlParser('assets/Saltarello/Saltarello.musicxml');
 
-  test('\'assets/Saltarello.musicxml\' Parsing Test', () {
+  test('\'assets/Saltarello/Saltarello.musicxml\' Parsing Test', () {
     final doc = mxlDocument.scoreXml;
 
     expect(doc.isScorePartwise, true);
