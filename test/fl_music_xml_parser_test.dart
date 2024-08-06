@@ -1,3 +1,4 @@
+import 'package:fl_music_xml_parser/src/body/score_part.dart';
 import 'package:fl_music_xml_parser/src/header/score_defaults.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -61,6 +62,21 @@ void main() async {
     expect(doc.partList?.scoreParts[0].midiInstrument?.volume, '80');
     expect(doc.partList?.scoreParts[0].midiInstrument?.pan, '0');
 
-    print('Test \'assets/Saltarello.musicxml\' passed!');
+    expect(doc.part?.partList.length, 1);
+    expect(doc.part?.partList[0].id, 'P1');
+    expect(doc.part?.partList[0].measures.length, 22);
+    expect(doc.part?.partList[0].measures[0].objects.length, 7);
+    doc.part?.partList[0].measures.forEach((measure) {
+      for (var element in measure.objects) {
+        if (element is Attributes) {
+          print(
+              '${element.keyFifths}/${element.keyMode}//${element.timeBeats}/${element.timeBeatType}//${element.clefSign}/${element.clefLine}');
+        } else if (element is Note) {
+          print(
+              '${element.pitch}/${element.duration}/${element.stemValue}/${element.beamValue}');
+        }
+      }
+      print('--------------------------------');
+    });
   });
 }

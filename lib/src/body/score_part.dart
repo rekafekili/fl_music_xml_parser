@@ -1,3 +1,6 @@
+import 'package:fl_music_xml_parser/src/data/beam_value.dart';
+import 'package:fl_music_xml_parser/src/data/note_type.dart';
+import 'package:fl_music_xml_parser/src/data/stem_value.dart';
 import 'package:xml/xml.dart';
 
 class ScorePart {
@@ -41,10 +44,10 @@ class Measure {
     width = double.parse(element.getAttribute('width') ?? '0.0');
 
     for (var el in element.childElements) {
-      if (el.getElement('attributes') != null) {
-        objects.add(Attributes(el.getElement('attributes')!));
-      } else if (el.getElement('note') != null) {
-        objects.add(Note(el.getElement('note')!));
+      if (el.name.local == 'attributes') {
+        objects.add(Attributes(el));
+      } else if (el.name.local == 'note') {
+        objects.add(Note(el));
       }
     }
   }
@@ -94,7 +97,9 @@ class Note extends MeasureObjects {
   String pitch = '';
   int duration = 0;
   int voice = 0;
-  String noteType = '';
+  NoteType noteType = NoteType.none;
+  StemValue stemValue = StemValue.none;
+  BeamValue beamValue = BeamValue.none;
 
   Note(XmlElement element) {
     defaultX = int.parse(element.getAttribute('default-x') ?? '0');
@@ -104,5 +109,13 @@ class Note extends MeasureObjects {
       pitch = pitchElement.getElement('step')?.innerText ?? '';
       pitch += pitchElement.getElement('octave')?.innerText ?? '';
     }
+
+    duration = int.parse(element.getElement('duration')?.innerText ?? '0');
+    voice = int.parse(element.getElement('voice')?.innerText ?? '0');
+    noteType = NoteType.fromString(element.getElement('type')?.innerText ?? '');
+    stemValue = StemValue.values
+        .byName(element.getElement('stem')?.innerText ?? 'none');
+    beamValue =
+        BeamValue.fromString(element.getElement('beam')?.innerText ?? 'none');
   }
 }
