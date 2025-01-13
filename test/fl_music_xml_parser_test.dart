@@ -68,14 +68,14 @@ void main() async {
     doc.part?.partList[0].measures.forEach((measure) {
       for (var element in measure.objects) {
         if (element is Attributes) {
-          print(
+          debugPrint(
               '${element.keyFifths}/${element.keyMode}//${element.timeBeats}/${element.timeBeatType}//${element.clefSign}/${element.clefLine}');
         } else if (element is Note) {
-          print(
+          debugPrint(
               '${element.pitch}/${element.duration}/${element.stemValue}/${element.beamValue}');
         }
       }
-      print('--------------------------------');
+      debugPrint('--------------------------------');
     });
   });
 }
