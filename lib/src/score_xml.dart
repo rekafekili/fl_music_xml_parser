@@ -7,6 +7,7 @@ import 'header/score_defaults.dart';
 import 'header/score_identification.dart';
 
 class ScoreXml {
+  XmlDocument xmlDocument;
   String? movementTitle;
   bool isScorePartwise = false;
 
@@ -15,7 +16,7 @@ class ScoreXml {
   ScorePartList? partList;
   ScorePart? part;
 
-  ScoreXml(XmlDocument xmlDocument) {
+  ScoreXml(this.xmlDocument) {
     isScorePartwise = (xmlDocument.rootElement.name.local == 'score-partwise');
 
     movementTitle =
@@ -32,5 +33,10 @@ class ScoreXml {
     partList = ScorePartList(nodePartList);
 
     part = ScorePart(xmlDocument.xpath('score-partwise/part').toList());
+  }
+
+  @override
+  String toString() {
+    return xmlDocument.toString();
   }
 }

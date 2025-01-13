@@ -11,6 +11,7 @@ export 'src/score_xml.dart';
 
 import 'package:fl_music_xml_parser/src/score_xml.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:xml/xml.dart';
 
 class MusicXmlParser {
@@ -24,5 +25,15 @@ class MusicXmlParser {
     final xmlStr = await rootBundle.loadString(filePath);
     final document = XmlDocument.parse(xmlStr);
     scoreXml = ScoreXml(document);
+  }
+
+  static Future<ScoreXml?> loadFromXmlFile(String filePath) {
+    return rootBundle.loadString(filePath).then((xmlStr) {
+      final document = XmlDocument.parse(xmlStr);
+      return ScoreXml(document);
+    }, onError: (error) {
+      debugPrint('Error: $error');
+      return null;
+    });
   }
 }
