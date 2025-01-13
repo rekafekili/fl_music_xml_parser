@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:fl_music_xml_parser/fl_music_xml_parser.dart';
+import 'package:example/viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -67,30 +67,57 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void onTapFile(String folder, String file) {
+    if (file.endsWith('.pdf') || file.endsWith('.png')) {
+      return;
+    }
+
+    final exampleAssetPath = exampleDirectory[folder]?.firstWhere(
+      (e) => e.endsWith('.png') || e.endsWith('pdf'),
+    );
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => Viewer(
+          exampleAssetPath: exampleAssetPath,
+          xmlAssetPath: file,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: exampleDirectory.isEmpty
-            ? const CircularProgressIndicator()
-            : ListView(
-                children: exampleDirectory.entries.map(
-                  (e) {
-                    return ExpansionTile(
-                      title: Text(e.key),
-                      children: e.value.map((file) {
-                        return ListTile(
-                          title: Text(file),
+      body: Column(
+        children: [
+          const Text(
+            'NOW The Parser supports only .musicxml files : 2025.01.13',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
+            ),
+          ),
+          Expanded(
+            child: exampleDirectory.isEmpty
+                ? const CircularProgressIndicator()
+                : ListView(
+                    children: exampleDirectory.entries.map(
+                      (entry) {
+                        return ExpansionTile(
+                          title: Text(entry.key),
+                          children: entry.value.map((file) {
+                            return ListTile(
+                              onTap: () => onTapFile(entry.key, file),
+                              title: Text(file),
+                            );
+                          }).toList(),
                         );
-                      }).toList(),
-                    );
-                  },
-                ).toList(),
-              ),
+                      },
+                    ).toList(),
+                  ),
+          ),
+        ],
       ),
     );
   }
