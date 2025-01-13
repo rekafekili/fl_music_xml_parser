@@ -27,7 +27,7 @@ class MusicXmlParser {
     scoreXml = ScoreXml(document);
   }
 
-  Future<ScoreXml?> loadFromXmlFile(String filePath) {
+  static Future<ScoreXml?> loadFromXmlFile(String filePath) {
     return rootBundle.loadString(filePath).then((xmlStr) {
       final document = XmlDocument.parse(xmlStr);
       return ScoreXml(document);
